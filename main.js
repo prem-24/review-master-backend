@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors'); // Import the cors middleware
 const reviewRoutes = require('./router/router');
 const dbConnection = require('./database/db');
 
@@ -11,6 +12,13 @@ const port = process.env.PORT || 5000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+
+// Enable CORS for all requests
+app.use(cors());
+
+app.get("/", (req, res) => {
+  res.json({ msg: "Hello friend!" });
+});
 
 // Connect to the database
 const startServer = async () => {
